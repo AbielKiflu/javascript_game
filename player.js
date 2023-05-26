@@ -17,17 +17,16 @@ export class Player{
         //speed
         this.speed=0;
         this.maxSpeed=10;
-        this.vy=0;
 
         // player weight
         this.weight=0;
+        this.vy=0;
 
     }
 
     update(input){
         // horizontal movement
         this.x +=this.speed;
-        console.log(this.x);
         if(input.includes("ArrowRight"))this.speed=this.maxSpeed;
         else if(input.includes("ArrowLeft"))this.speed= -(this.maxSpeed);
         else this.speed=0;
@@ -37,14 +36,20 @@ export class Player{
         if(this.x>this.game.width - this.width) this.x=this.game.width - this.width;
         
         // vertical movement
+        if(input.includes("ArrowUp") && this.onGround()) {
+            this.vy -=20;
+           
+        };
 
         this.y += this.vy;
-        if(input.includes("ArrowUp") && this.onGround()) this.vy -= 20;
-        this.y += this.vy;
-        if(!this.onGround()) this.vy +=this.weight;
-        else this.vy=0;
 
+        if(!this.onGround()) {
+            this.vy +=this.weight;
+        }else{
+            this.vy=0;
+        }
 
+        
     }
 
     draw( context) {
