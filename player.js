@@ -19,7 +19,7 @@ export class Player{
         this.maxSpeed=10;
 
         // player weight
-        this.weight=0;
+        this.weight=1;
         this.vy=0;
 
     }
@@ -38,11 +38,11 @@ export class Player{
         // vertical movement
         if(input.includes("ArrowUp") && this.onGround()) {
             this.vy -=20;
-           
+            
         };
 
         this.y += this.vy;
-
+        
         if(!this.onGround()) {
             this.vy +=this.weight;
         }else{
